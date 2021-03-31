@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="apple-touch-icon" type="image/png"
+          href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+    <meta name="apple-mobile-web-app-title" content="CodePen">
+    <link rel="shortcut icon" type="image/x-icon"
+          href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+    <link rel="mask-icon" type=""
+          href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg"
+          color="#111">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+    <link rel="stylesheet" href="./style/style.css" type="text/css" media="all">
+    <script src="./script/script2.js" defer></script>
+
+    <title>Лабораторна УВЧ</title>
+</head>
+<body translate="no">
+<div class="container">
+    <div class="row">
+        <div class="jumbotron">
+            <div class="container">
+                <img style="float: left;margin: 0 20px 20px 0; height: 200px; " src="./media/pic.png">
+                <h2 class="display-4">
+                    <span lang="uk">ВИВЧЕННЯ АПАРАТІВ І МЕТОДІВ УВЧ-ТЕРАПІЇ ЕЛЕКТРИЧНИМ І МАГНІТНИМ ПОЛЯМИ ТА
+                    ВЧ-СТРУМОМ</span>
+                    <span lang="en">STUDY OF DEVICES AND METHODS OF HF AND UHF THERAPY</span>
+                </h2>
+                <button onclick="location.href='index.html'" type="button" class="btn btn-outline-secondary"><h3><span lang="uk">Електричне поле УВЧ<br> 30 Вт</span><span lang="en">Electric UHF field<br> 30 W</span></h3></button>
+                <button onclick="location.href='index2.html'" type="button" class="btn btn-outline-success"><h3><span lang="uk">Магнітне поле УВЧ<br> 15 Вт</span><span lang="en">Magnetic UHF field<br> 15 W</span></h3></button>
+                <button style="float: right; margin-top: 20px" id="switch-lang" class="btn btn-primary">
+                    <span lang="en">Українська</span>
+                    <span lang="uk">English</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="col-4">
+            <div id="wrapper1">
+
+                    <div id="termometer1">
+                        <div id="temperature1" style="height:0" data-value="0°C"></div>
+                        <div id="graduations1"></div>
+                    </div>
+
+                    <div id="playground1">
+                        <div id="range1" style="display:none;">
+                            <input id="minTemp" type="text" value="-20">
+                            <input id="gl" type="range" min="-20" max="50" value="0">
+                            <input id="maxTemp" type="text" value="50">
+                        </div>
+                        <p style="display: none" id="unit">Celcius C°</p>
+                    </div>
+
+
+                <h2 style="align-items: center;">
+                    <span lang="en">DIELECTRIC</span><span lang="uk">ДІЕЛЕКТРИК</span>
+                    <br><span lang="uk">( гліцерин )</span><span lang="en">( glycerol )</span>
+                </h2>
+            </div>
+        </div>
+        <div class="col-4">
+            <div style="align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between">
+                <video style="display: none" muted id="myVideo1" autoplay loop class="myvideo">
+                    <source id="mp4_src1" src="./media/capacitor-stop.mp4" type="video/mp4">
+                </video>
+                <video  muted id="myVideo2" autoplay loop class="myvideo">
+                    <source id="mp4_src2" src="./media/coil-stop.mp4" type="video/mp4">
+                </video>
+                <div class="col align-self-center" style="background-color: white;     margin: 10px;
+    align-items: center;
+    text-align: center;">
+                    <button class="btn btn-success" onclick="myFunction1()" id="start"><span lang="uk">Старт</span><span lang="en">Start</span></button>
+                    <button class="btn btn-danger" id="stop" style="display: none;" hidden>Стоп</button>
+                    <button class="btn btn-info" id="clear" hidden>Очистити</button>
+                    <!--            <button class="btn btn-info" id="round" style="display: none;">У список</button>-->
+                    <h1 style="text-align: center;">
+                        <time>00:00:00</time>
+                    </h1>
+                </div>
+            </div>
+
+<!--            <ol reversed id="round-list">-->
+
+<!--            </ol>-->
+        </div>
+        <div class="col-4">
+            <div id="wrapper2">
+                <div id="termometer2">
+                    <div id="temperature2"
+                         style="height: 0%;"
+                         data-value="0°C"></div>
+                    <div id="graduations2"></div>
+                </div>
+                <div id="playground">
+                    <div id="range" style="display: none">
+                        <input id="minTemp2" type="text" value="0">
+                        <input id="nacl" type="range" min="0" max="50" value="0">
+                        <input id="maxTemp2" type="text" value="50">
+                    </div>
+                    <p style="display: none" id="unit2">Celcius C°</p>
+                </div>
+                <h2 style="align-items: center;">
+                    <span lang="en">ELECTROLYTE</span><span lang="uk">ЕЛЕКТРОЛІТ</span>
+                    <br><span lang="uk">( розчин NaCl )</span><span lang="en">(NaCl solution)</span>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div id="mpc" style="display: none">
+        <h3><span lang="uk">Магнітне поле УВЧ</span><span lang="en">Magnetic UHF field</span></h3>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">t, <span lang=uk"">хв</span><span lang="en">min</span></th>
+                <th scope="col">T - <span lang="uk">діелектрик (гліцерин)</span><span lang="en">dielectric (glycerol)</span>, °C</th>
+                <th scope="col">T - <span lang="uk">електроліт (pозчин NaCl)</span><span lang="en">electrolyte (NaCl solution)</span>, °C</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-mpc_id="0" style="display:none;">
+                <th scope="row">0</th>
+                <td  class="gl">17</td>
+                <td class="nacl">17</td>
+            </tr>
+            <tr data-mpc_id="1" style="display:none;">
+                <th scope="row">1</th>
+                <td class="gl">17.5</td>
+                <td class="nacl">20</td>
+            </tr>
+            <tr data-mpc_id="2" style="display:none;">
+                <th scope="row">2</th>
+                <td class="gl">17.5</td>
+                <td class="nacl">22</td>
+            </tr>
+            <tr data-mpc_id="3" style="display:none;">
+                <th scope="row">3</th>
+                <td class="gl">17.5</td>
+                <td class="nacl">24</td>
+            </tr>
+            <tr data-mpc_id="4" style="display:none;">
+                <th scope="row">4</th>
+                <td class="gl">17.5</td>
+                <td class="nacl">26.5</td>
+            </tr>
+            <tr data-mpc_id="5" style="display:none;">
+                <th scope="row">5</th>
+                <td class="gl">17.5</td>
+                <td class="nacl">32</td>
+            </tr>
+            <tr data-mpc_id="6" style="display:none;">
+                <th scope="row">6</th>
+                <td class="gl">18</td>
+                <td class="nacl">33</td>
+            </tr>
+            <tr data-mpc_id="7" style="display:none;">
+                <th scope="row">7</th>
+                <td class="gl">18</td>
+                <td class="nacl">33</td>
+            </tr>
+            <tr data-mpc_id="8" style="display:none;">
+                <th scope="row">8</th>
+                <td class="gl">18.5</td>
+                <td class="nacl">35</td>
+            </tr>
+            <tr data-mpc_id="9" style="display:none;">
+                <th scope="row">9</th>
+                <td class="gl">18.5</td>
+                <td class="nacl">36.5</td>
+            </tr>
+            <tr data-mpc_id="10" style="display:none;">
+                <th scope="row">10</th>
+                <td class="gl">19</td>
+                <td class="nacl">37.5</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div id="epc" style="display: none">
+        <h3><span lang="uk">Електричне поле УВЧ</span><span lang="en">Electric UHF field</span></h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">t, <span lang=uk"">хв</span><span lang="en">min</span></th>
+            <th scope="col">T - <span lang="uk">діелектрик (гліцерин)</span><span lang="en">dielectric (glycerol)</span>, °C</th>
+            <th scope="col">T - <span lang="uk">електроліт (pозчин NaCl)</span><span lang="en">electrolyte (NaCl solution)</span>, °C</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-epc_id="0" style="display:none;">
+            <th scope="row">0</th>
+            <td class="gl">16.5</td>
+            <td class="nacl">16.5</td>
+        </tr>
+        <tr data-epc_id="1" style="display:none;">
+            <th scope="row">1</th>
+            <td class="gl">17</td>
+            <td class="nacl">17</td>
+        </tr>
+        <tr data-epc_id="2" style="display:none;">
+            <th scope="row">2</th>
+            <td class="gl">18.5</td>
+            <td class="nacl">18</td>
+        </tr>
+        <tr data-epc_id="3" style="display:none;">
+            <th scope="row">3</th>
+            <td class="gl">20</td>
+            <td class="nacl">19</td>
+        </tr>
+        <tr data-epc_id="4" style="display:none;">
+            <th scope="row">4</th>
+            <td class="gl">21</td>
+            <td class="nacl">19.5</td>
+        </tr>
+        <tr data-epc_id="5" style="display:none;">
+            <th scope="row">5</th>
+            <td class="gl">22</td>
+            <td class="nacl">20.5</td>
+        </tr>
+        <tr data-epc_id="6" style="display:none;">
+            <th scope="row">6</th>
+            <td class="gl">22.5</td>
+            <td class="nacl">21</td>
+        </tr>
+        <tr data-epc_id="7" style="display:none;">
+            <th scope="row">7</th>
+            <td class="gl">23.5</td>
+            <td class="nacl">21.5</td>
+        </tr>
+        <tr data-epc_id="8" style="display:none;">
+            <th scope="row">8</th>
+            <td class="gl">24.5</td>
+            <td class="nacl">22.5</td>
+        </tr>
+        <tr data-epc_id="9" style="display:none;">
+            <th scope="row">9</th>
+            <td class="gl">25.5</td>
+            <td class="nacl">23.5</td>
+        </tr>
+        <tr data-epc_id="10" style="display:none;">
+            <th scope="row">10</th>
+            <td class="gl">27</td>
+            <td class="nacl">24</td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+</body>
+<script>$('[lang="en"]').hide();
+$('#switch-lang').click(function() {
+  $('[lang="uk"]').toggle();
+  $('[lang="en"]').toggle();
+});</script>
+<script id="rendered-js">
+//set all our variables
+var h1 = document.getElementsByTagName('h1')[0],
+start = document.getElementById('start'),
+stop = document.getElementById('stop'),
+clear = document.getElementById('clear'),
+round = document.getElementById('round'),
+roundList = document.getElementById('round-list'),
+seconds = 0,minutes = 0,hours = 0,
+storedSecond = 0,storedMinutes = 0,storedHours = 0,
+t;
+
+
+//lets format it correctly if there if there is single digits:
+function timeFormatting(timer, minutter, sekunder) {
+  return (timer ? timer > 9 ? timer : "0" + timer : "00") + ":" + (minutter ? minutter > 9 ? minutter : "0" + minutter : "00") + ":" + (sekunder > 9 ? sekunder : "0" + sekunder);
+}
+
+//the loop that handles the clock
+function add() {
+  seconds++;
+  if (seconds >= 60) {
+    seconds = 0;
+    minutes++;
+    if (minutes >= 60) {
+      minutes = 0;
+      hours++;
+    }
+  }
+
+  h1.textContent = timeFormatting(hours, minutes, seconds);
+
+  timer();
+}
+
+///the timer that goes off and triggers add() every second:
+function timer() {
+  t = setTimeout(add, 1000);
+
+
+setInterval(() => {
+clearTimeout(t);
+},
+600000);
+}
+
+setTimeout(() => {
+$('#clear').click();
+$('#stop').click();
+
+},
+601000);
+
+//starts the timer at refresh:
+//timer();
+
+
+/* Start button */
+start.onclick = function () {
+  //start the timer:
+  timer();
+  $('#stop').show();
+  $('#start').hide();
+  $('#round').show();
+  $('#clear').hide();
+};
+
+/* Stop button */
+stop.onclick = function () {
+  //stop the timer:
+  clearTimeout(t);
+  $('#stop').hide();
+  $('#start').show();
+  $('#round').hide();
+  $('#clear').show();
+  //also add last round when you click stop:
+  addRound();
+};
+
+/* Clear button */
+clear.onclick = function () {
+  h1.textContent = "00:00:00";
+  seconds = 0;minutes = 0;hours = 0;
+  $('#round-list').empty();
+  storedSecond = 0;
+  storedMinutes = 0;
+  storedHours = 0;
+};
+
+/* round button */
+round.onclick = addRound;
+
+
+//add Rounds to list:
+function addRound() {
+  //get the difference between now and last round
+  var RoundSeconds = seconds - storedSecond;
+  var RoundMinutes = minutes - storedMinutes;
+  var RoundHours = hours - storedHours;
+
+  //store this round as a variable
+  var thisRound = timeFormatting(RoundHours, RoundMinutes, RoundSeconds);
+
+  //add the round to our list if more than a second:
+  if (thisRound != "00:00:00") {
+    $('#round-list').prepend('<li>' + thisRound + "</li>");
+  }
+
+  //store this as last round
+  storedSecond = seconds,
+  storedMinutes = minutes,
+  storedHours = hours;
+
+}
+//# sourceURL=pen.js
+</script>
+
+<script id="rendered-js">
+const units = {
+  Celcius: "°C",
+  Fahrenheit: "°F" };
+
+
+const config = {
+  minTemp: 0,
+  maxTemp: 50,
+  unit: "Celcius" };
+
+
+// Change min and max temperature values
+
+const tempValueInputs = document.querySelectorAll("input[type='text']");
+
+tempValueInputs.forEach(input => {
+  input.addEventListener("change", event => {
+    const newValue = event.target.value;
+
+    if (isNaN(newValue)) {
+      return input.value = config[input.id];
+    } else {
+      config[input.id] = input.value;
+      range[input.id.slice(0, 3)] = config[input.id]; // Update range
+      return setTemperature(); // Update temperature
+    }
+  });
+});
+
+// Switch unit of temperature
+
+const unitP = document.getElementById("unit");
+
+unitP.addEventListener("click", () => {
+  config.unit = config.unit === "Celcius" ? "Fahrenheit" : "Celcius";
+  unitP.innerHTML = config.unit + ' ' + units[config.unit];
+  return setTemperature();
+});
+
+// Change temperature
+
+const range = document.querySelector("input[type='range']");
+const temperature = document.getElementById("temperature1");
+
+function setTemperature() {
+  temperature.style.height = (range.value - config.minTemp) / (config.maxTemp - config.minTemp) * 100 + "%";
+  temperature.dataset.value = range.value + units[config.unit];
+}
+
+range.addEventListener("input", setTemperature);
+setTimeout(setTemperature, 1000);
+//# sourceURL=pen.js
+
+</script>
+</html>
